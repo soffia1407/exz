@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Интернет-магазин</title>
+</head>
+<body>
+    <header>
+        <nav>
+          <a href="/">Название сайта</a>
+          <a href="/service/">Услуги/Товары</a>
+          <a href="/login/">Авторизация</a>
+          <a href="/register/">Регистрация</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h1>Добро пожаловать в наш магазин!</h1>
+            <p>У нас вы найдете лучшие товары и услуги для вашего бизнеса.</p>
+        </section>
+
+        <section>
+             <form action="/service/" method="get">
+                 <input type="text" name="q" placeholder="Поиск товаров или услуг">
+                 <button type="submit">Найти</button>
+             </form>
+        </section>
+        <section>
+            <h2>Последние товары</h2>
+            {% if latest_products %}
+                <ul>
+                    {% for product in latest_products %}
+                        <li>
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 100px; max-height: 100px;">
+                            {% endif %}
+                            <a href="/product/{{product.id}}">{{ product.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>Пока нет ни одного товара</p>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
